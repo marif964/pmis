@@ -69,7 +69,7 @@
 								?>
 							</td>
 							<td class=""><p class="m-0 truncate-1"><?php echo $row['project_start'] ?></p></td>
-							<td class=""><?php echo $row['project_end'] ?></td>
+							<td class=""><?php echo date("d-m-y",strtotime($row['projct_end'])) ?></td>
 							
 							<td class="text-center">
 								<?php 
@@ -110,7 +110,7 @@
 				                    <span class="sr-only">Toggle Dropdown</span>
 				                  </button>
 				                  <div class="dropdown-menu" role="menu">
-								  	<a class="dropdown-item" href="./?page=projects_views/view_project_changes&id=<?= $row['id'] ?>" data-id ="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
+								  	<a class="dropdown-item" href="./?page=projects/view_project&id=<?= $row['id'] ?>" data-id ="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
 									<?php if($row['status'] != 2): ?>
 				                    <div class="dropdown-divider"></div>
 				                    <a class="dropdown-item edit_data" href="javascript:void(0)" data-id ="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
@@ -133,7 +133,7 @@
 			uni_modal("Add New Project","projects/manage_project.php")
 		})
 		$('.view_data').click(function(){
-			uni_modal("Project Details","projects_views/view_project_changes.php?id="+$(this).attr('data-id'))
+			uni_modal("Project Details","projects/view_project.php?id="+$(this).attr('data-id'))
 		})
         $('.edit_data').click(function(){
 			uni_modal("Update Project Details","projects/manage_project.php?id="+$(this).attr('data-id'))

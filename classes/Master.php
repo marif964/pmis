@@ -93,6 +93,64 @@ Class Master extends DBConnection {
 		return json_encode($resp);
 	}
 
+	function save_donor_type(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id'))){
+				if(!is_numeric($v))
+					$v = $this->conn->real_escape_string($v);
+				if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$v}' ";
+			}
+		}
+		if(empty($id)){
+			$sql = "INSERT INTO `donor_table` set {$data} ";
+		}else{
+			$sql = "UPDATE `donor_table` set {$data} where id = '{$id}' ";
+		}
+		$check = $this->conn->query("SELECT * FROM `donor_table` where `name` = '{$name}' ".(is_numeric($id) && $id > 0 ? " and id != '{$id}'" : "")." ")->num_rows;
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'Donor Type already exists.';
+			
+		}else{
+			$save = $this->conn->query($sql);
+			if($save){
+				$rid = !empty($id) ? $id : $this->conn->insert_id;
+				$resp['id'] = $rid;
+				$resp['status'] = 'success';
+				if(empty($id))
+					$resp['msg'] = "Donor Type has successfully added.";
+				else
+					$resp['msg'] = "Donor Type details has been updated successfully.";
+			}else{
+				$resp['status'] = 'failed';
+				$resp['msg'] = "An error occured.";
+				$resp['err'] = $this->conn->error."[{$sql}]";
+			}
+		}
+		if($resp['status'] =='success')
+			$this->settings->set_flashdata('success',$resp['msg']);
+		return json_encode($resp);
+	}
+	function delete_donor_type(){
+		extract($_POST);
+		$del = $this->conn->query("UPDATE `donor_table` set delete_flag = 1 where id = '{$id}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Project Type has been deleted successfully.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+	}
+
+	
+
+
+
 	function save_project_type(){
 		extract($_POST);
 		$data = "";

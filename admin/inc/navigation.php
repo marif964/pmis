@@ -39,15 +39,15 @@
                         </p>
                       </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                       <a href="<?php echo base_url ?>admin/?page=employees" class="nav-link nav-employees">
                         <i class="nav-icon fas fa-user-tie"></i>
                         <p>
                           Employee List
                         </p>
                       </a>
-                    </li>
-                    <li class="nav-header">Reports</li>
+                    </li> -->
+                    <!-- <li class="nav-header">Reports</li>
                       <li class="nav-item dropdown">
                         <a href="<?php echo base_url ?>admin/?page=reports/rendered_time" class="nav-link nav-reports_rendered_time">
                           <i class="nav-icon fas fa-circle"></i>
@@ -71,7 +71,7 @@
                             Employee Time Alloted
                           </p>
                         </a>
-                      </li>
+                      </li> -->
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=project_types" class="nav-link nav-work_types">
@@ -94,6 +94,14 @@
                         <i class="nav-icon fas fa-list"></i>
                         <p>
                           Work Type List
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=project_donors" class="nav-link nav-work_types">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                          Donor List
                         </p>
                       </a>
                     </li>
